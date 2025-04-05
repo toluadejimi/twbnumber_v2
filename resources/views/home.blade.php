@@ -108,9 +108,17 @@
                                     <strong>N{{ number_format($cost, 2) }}</strong>
                                 </div>
                                 <div class="col">
-                                    <a href="/order-now?service={{ $key }}&price={{ $cost }}&cost={{ $innerValue->cost }}&name={{ $innerValue->name }}">
-                                        <i class="fa fa-shopping-bag"></i>
-                                    </a>
+                                    <form action="{{ url('/order-diasy') }}" method="POST" style="display:inline;">
+                                        @csrf
+                                        <input type="hidden" name="service" value="{{ $key }}">
+                                        <input type="hidden" name="price" value="{{ $cost }}">
+                                        <input type="hidden" name="cost" value="{{ $innerValue->cost }}">
+                                        <input type="hidden" name="name" value="{{ $innerValue->name }}">
+                                        <button type="submit" style="background:none; border:none; padding:0; cursor:pointer;">
+                                            <i onclick="this.style.display='none'" class="fa fa-shopping-bag"></i>
+                                        </button>
+                                    </form>
+
                                 </div>
                                 @else
                                 <div style="font-size: 11px" class="col">
@@ -118,9 +126,16 @@
                                     <strong>N{{ number_format($cost, 2) }}</strong>
                                 </div>
                                 <div class="col">
-                                    <a href="/order-now?service={{ $key }}&price={{ $cost }}&cost={{ $innerValue->cost }}&name={{ $innerValue->name }}">
-                                        <i class="fa fa-shopping-bag"></i>
-                                    </a>
+                                    <form action="{{ url('/order-diasy') }}" method="POST" style="display:inline;">
+                                        @csrf
+                                        <input type="hidden" name="service" value="{{ $key }}">
+                                        <input type="hidden" name="price" value="{{ $cost }}">
+                                        <input type="hidden" name="cost" value="{{ $innerValue->cost }}">
+                                        <input type="hidden" name="name" value="{{ $innerValue->name }}">
+                                        <button type="submit" style="background:none; border:none; padding:0; cursor:pointer;">
+                                            <i onclick="this.style.display='none'" class="fa fa-shopping-bag"></i>
+                                        </button>
+                                    </form>
                                 </div>
                                 @endif
 
@@ -148,9 +163,18 @@
 
 
                                 <div class="col">
-                                    <a href="/order-oprime?service={{ $key->name }}&price={{ $cost }}&cost={{ $key->price }}">
-                                        <i class="fa fa-shopping-bag"></i>
-                                    </a>
+
+                                    <form action="{{ url('/order-server2') }}" method="POST" style="display:inline;">
+                                        @csrf
+                                        <input type="hidden" name="service" value="{{ $key->name }}">
+                                        <input type="hidden" name="price" value="{{ $cost }}">
+                                        <input type="hidden" name="rprice" value="{{ $rcost }}">
+                                        <input type="hidden" name="cost" value="{{ $key->price }}">
+                                        <input type="hidden" name="name" value="{{ $innerValue->name }}">
+                                        <button type="submit" style="background:none; border:none; padding:0; cursor:pointer;">
+                                            <i onclick="this.style.display='none'" class="fa fa-shopping-bag"></i>
+                                        </button>
+                                    </form>
                                 </div>
                                 @else
                                 <div style="font-size: 11px" class="col">
@@ -160,9 +184,17 @@
 
 
                                 <div class="col">
-                                    <a href="/order-oprime?service={{ $key->name }}&price={{ $cost }}&cost={{ $key->price }}">
-                                        <i class="fa fa-shopping-bag"></i>
-                                    </a>
+
+                                    <form action="{{ url('/order-server2') }}" method="POST" style="display:inline;">
+                                        @csrf
+                                        <input type="hidden" name="service" value="{{ $key->name }}">
+                                        <input type="hidden" name="price" value="{{ $cost }}">
+                                        <input type="hidden" name="cost" value="{{ $key->price }}">
+                                        <input type="hidden" name="name" value="{{ $innerValue->name }}">
+                                        <button type="submit" style="background:none; border:none; padding:0; cursor:pointer;">
+                                            <i onclick="this.style.display='none'" class="fa fa-shopping-bag"></i>
+                                        </button>
+                                    </form>
                                 </div>
                                 @endif
 

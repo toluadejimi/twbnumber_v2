@@ -92,10 +92,29 @@ class HomeController extends Controller
 
 
 
+
+
         $service = $request->service;
-        $price = $request->price;
         $cost = $request->cost;
         $service_name = $request->name;
+
+
+        $data['get_rate'] = Setting::where('id', 1)->first()->rate;
+        $data['margin'] = Setting::where('id', 1)->first()->margin;
+
+
+        $gcost = get_d_price($service);
+        $margin = Setting::where('id', 1)->first()->margin;
+        $rate = Setting::where('id', 1)->first()->rate;
+
+        $costs = $rate * $gcost['cost'] + $margin;
+
+        $price = $costs;
+
+        if (Auth::user()->wallet < $costs) {
+            return back()->with('error', "Insufficient Funds");
+        }
+
 
         $order = create_order($service, $price, $cost, $service_name);
 
@@ -140,8 +159,6 @@ class HomeController extends Controller
         }
 
         if ($order == 1) {
- User::where('id', Auth::id())->decrement('wallet', $request->price);
-
             $data['services'] = get_services();
             $data['get_rate'] = Setting::where('id', 1)->first()->rate;
             $data['margin'] = Setting::where('id', 1)->first()->margin;
@@ -176,8 +193,14 @@ class HomeController extends Controller
 
 
         $service = $request->service;
-        $price = $request->price;
         $cost = $request->cost;
+        $rcost = $request->rprice;
+
+        if (Auth::user()->wallet < $rcost) {
+            return back()->with('error', "Insufficient Funds");
+        }
+
+        $price = $rcost;
 
         $order = create_tellbot_order($service, $price, $cost);
 

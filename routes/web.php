@@ -87,8 +87,6 @@ Route::any('unban-users',  [HomeController::class,'unban_user']);
 
 
 
-
-
 Route::group(['middleware' => ['auth', 'user', 'session.timeout']], function () {
 
     Route::get('home',  [HomeController::class,'home']);
@@ -112,8 +110,8 @@ Route::group(['middleware' => ['auth', 'user', 'session.timeout']], function () 
 
     Route::any('check-av',  [HomeController::class,'check_av']);
 
-    Route::any('order-now',  [HomeController::class,'order_now']);
-    Route::any('order-oprime',  [HomeController::class,'tellabot_order_now']);
+    Route::post('order-diasy',  [HomeController::class,'order_now']);
+    Route::post('order-server2',  [HomeController::class,'tellabot_order_now']);
     Route::any('order-sim',  [HomeController::class,'online_sms']);
 
     Route::any('cancle-sms',  [HomeController::class,'cancle_sms']);

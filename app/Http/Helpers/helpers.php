@@ -2,6 +2,7 @@
 
 use App\Constants\Status;
 use App\Models\Extension;
+use App\Models\User;
 use App\Models\Verification;
 use App\Lib\GoogleAuthenticator;
 use Illuminate\Support\Facades\Auth;
@@ -244,6 +245,44 @@ function getOnlineSimServices() {
 }
 
 
+function get_d_price($service){
+    $APIKEY = env('KEY');
+    $curl = curl_init();
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => "https://daisysms.com/stubs/handler_api.php?api_key=$APIKEY&action=getPrices&service=$service",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'GET',
+        CURLOPT_HTTPHEADER => array(
+            'Content-Type: application/json',
+            'Accept: application/json',
+        ),
+    ));
+
+    $var = curl_exec($curl);
+    curl_close($curl);
+    $var = json_decode($var);
+
+    foreach($var as $key => $value){
+        $service2['data'] =  $value;
+    }
+
+
+
+    $data['cost'] = $service2["data"]->$service->cost;
+    $data['name'] = $service2["data"]->$service->name;
+
+
+    return $data;
+
+}
+
+
+
 function create_order($service, $price, $cost, $service_name){
 
 
@@ -272,6 +311,8 @@ function create_order($service, $price, $cost, $service_name){
    $result = $var ??  null;
 
     if(strstr($result, "ACCESS_NUMBER") !== false) {
+
+        User::where('id', Auth::id())->decrement('wallet', $price);
 
         $parts = explode(":", $result);
         $accessNumber = $parts[0];
@@ -349,7 +390,10 @@ function create_tellbot_order($service, $price, $cost){
 
      if($result['status'] == "ok") {
 
-        //  $parts = explode(":", $result);
+         User::where('id', Auth::id())->decrement('wallet', $price);
+
+
+         //  $parts = explode(":", $result);
          $accessNumber = $result_d['mdn'];
          $id = $result_d['id'];
          $phone = $result_d['mdn'];
