@@ -1,0 +1,52 @@
+[21-May-2024 15:42:10 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/oprimeco/oprimeverify.com/config/database.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/oprimeco/oprimeverify.com/config/database.php on line 18
+[22-May-2024 02:15:18 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/oprimeco/oprimeverify.com/config/database.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/oprimeco/oprimeverify.com/config/database.php on line 18
+[23-May-2024 00:16:51 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/oprimeco/oprimeverify.com/config/database.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/oprimeco/oprimeverify.com/config/database.php on line 18
+[25-Feb-2025 08:41:28 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/twbverify/public_html/config/app.php:19
+Stack trace:
+#0 {main}
+  thrown in /home/twbverify/public_html/config/app.php on line 19
+[25-Feb-2025 08:41:28 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/twbverify/public_html/config/database.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/twbverify/public_html/config/database.php on line 18
+[25-Feb-2025 08:41:28 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/twbverify/public_html/config/mail.php:16
+Stack trace:
+#0 {main}
+  thrown in /home/twbverify/public_html/config/mail.php on line 16
+[25-Feb-2025 08:41:29 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/twbverify/public_html/config/cache.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/twbverify/public_html/config/cache.php on line 18
+[25-Feb-2025 08:41:29 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/twbverify/public_html/config/queue.php:16
+Stack trace:
+#0 {main}
+  thrown in /home/twbverify/public_html/config/queue.php on line 16
+[25-Feb-2025 08:41:29 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/twbverify/public_html/config/session.php:21
+Stack trace:
+#0 {main}
+  thrown in /home/twbverify/public_html/config/session.php on line 21
+[25-Feb-2025 08:41:29 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function resource_path() in /home/twbverify/public_html/config/view.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/twbverify/public_html/config/view.php on line 17
+[25-Feb-2025 08:41:30 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/twbverify/public_html/config/filesystems.php:16
+Stack trace:
+#0 {main}
+  thrown in /home/twbverify/public_html/config/filesystems.php on line 16
+[25-Feb-2025 08:41:30 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/twbverify/public_html/config/services.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/twbverify/public_html/config/services.php on line 18
+[20-Mar-2025 20:12:28 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/twbverify/public_html/config/cache.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/twbverify/public_html/config/cache.php on line 18

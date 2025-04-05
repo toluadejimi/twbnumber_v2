@@ -1,0 +1,4 @@
+[07-May-2024 03:30:24 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\ServiceProvider" not found in /home/oprimeve/public_html/app/Providers/AppServiceProvider.php:8
+Stack trace:
+#0 {main}
+  thrown in /home/oprimeve/public_html/app/Providers/AppServiceProvider.php on line 8
