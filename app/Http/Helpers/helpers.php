@@ -392,7 +392,6 @@ function create_tellbot_order($service, $price, $cost){
 
          User::where('id', Auth::id())->decrement('wallet', $price);
 
-
          //  $parts = explode(":", $result);
          $accessNumber = $result_d['mdn'];
          $id = $result_d['id'];

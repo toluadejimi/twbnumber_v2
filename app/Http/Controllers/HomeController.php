@@ -176,6 +176,7 @@ class HomeController extends Controller
     public function tellabot_order_now(Request $request)
     {
 
+
         $total_funded = Transaction::where('user_id', Auth::id())->where('status', 2)->sum('amount');
         $total_bought = verification::where('user_id', Auth::id())->where('status', 2)->sum('cost');
         if ($total_bought > $total_funded) {
@@ -194,13 +195,13 @@ class HomeController extends Controller
 
         $service = $request->service;
         $cost = $request->cost;
-        $rcost = $request->rprice;
+        $rcost = $request->cost;
 
         if (Auth::user()->wallet < $rcost) {
             return back()->with('error', "Insufficient Funds");
         }
 
-        $price = $rcost;
+        $price = $request->rprice;
 
         $order = create_tellbot_order($service, $price, $cost);
 

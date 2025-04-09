@@ -168,7 +168,7 @@
                                         @csrf
                                         <input type="hidden" name="service" value="{{ $key->name }}">
                                         <input type="hidden" name="price" value="{{ $cost }}">
-                                        <input type="hidden" name="rprice" value="{{ $rcost }}">
+                                        <input type="hidden" name="rprice" value="{{ $cost }}">
                                         <input type="hidden" name="cost" value="{{ $key->price }}">
                                         <input type="hidden" name="name" value="{{ $innerValue->name }}">
                                         <button type="submit" style="background:none; border:none; padding:0; cursor:pointer;">
@@ -190,6 +190,7 @@
                                         <input type="hidden" name="service" value="{{ $key->name }}">
                                         <input type="hidden" name="price" value="{{ $cost }}">
                                         <input type="hidden" name="cost" value="{{ $key->price }}">
+                                        <input type="hidden" name="rprice" value="{{ $cost }}">
                                         <input type="hidden" name="name" value="{{ $innerValue->name }}">
                                         <button type="submit" style="background:none; border:none; padding:0; cursor:pointer;">
                                             <i onclick="this.style.display='none'" class="fa fa-shopping-bag"></i>
