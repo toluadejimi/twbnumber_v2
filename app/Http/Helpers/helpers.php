@@ -379,23 +379,17 @@ function create_tellbot_order($service, $price, $cost){
     $result = $var ??  null;
     $result = json_decode($result, true);
     $result_d = $result['message'][0];
-    $mdn = $result['message'][0]['mdn'] ?? null;
 
 
+     if($result['status'] == "ok") {
+
+         User::where('id', Auth::id())->decrement('wallet', $price);
 
 
-
-
-     if($result['status'] == "ok" && $mdn != null ) {
-
-         User::where('id', Auth::id())->decrement('wallet', (int)$price);
-
-         //  $parts = explode(":", $result);
          $accessNumber = $result_d['mdn'];
          $id = $result_d['id'];
          $phone = $result_d['mdn'];
 
-        //  dd($accessNumber);
 
          $ver = new Verification();
          $ver->user_id = Auth::id();

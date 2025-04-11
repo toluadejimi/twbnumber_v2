@@ -227,6 +227,10 @@ class HomeController extends Controller
             return redirect('home')->with('error', 'Number Currently out of stock, Please check back later');
         }
 
+        if ($order == 69) {
+            return redirect('home')->with('error', 'Insufficient Balance');
+        }
+
         if ($order == 0) {
             $message = "TWBNUMBER | Low balance";
             send_notification($message);
@@ -245,7 +249,6 @@ class HomeController extends Controller
 
         if ($order == 1) {
 
-            User::where('id', Auth::id())->decrement('wallet', $request->price);
 
             $data['services'] = get_tellbot_service();
             $data['get_rate'] = Setting::where('id', 1)->first()->rate;
