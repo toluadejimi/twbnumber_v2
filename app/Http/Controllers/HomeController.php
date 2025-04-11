@@ -201,7 +201,8 @@ class HomeController extends Controller
             return back()->with('error', "Insufficient Funds");
         }
 
-        $price = $request->rprice;
+        $price = (int)$request->rprice;
+
 
         $order = create_tellbot_order($service, $price, $cost);
 
@@ -257,6 +258,11 @@ class HomeController extends Controller
             return redirect('home')->with('message', 'Order Placed');
 
             // return view('receivesmstella', $data);
+        }
+
+        if ($order == 9) {
+
+            return redirect('home')->with('error', 'Number not availabe at the moment, Please try again later');
         }
     }
 
@@ -447,8 +453,6 @@ class HomeController extends Controller
         $order = Verification::where('order_id', $request->id)->first() ?? null;
 
 
-
-
         if ($order == null) {
             return redirect('home')->with('error', 'Order not found');
         }
@@ -466,10 +470,13 @@ class HomeController extends Controller
 
                 if($order->status == 1){
 
+
                     $amount = number_format($order->cost, 2);
-                    Verification::where('order_id', $request->id)->delete();
-                    User::where('id', Auth::id())->increment('wallet', $order->cost);
-                    return redirect('home')->with('message', "Order has been cancled, NGN$amount has been refunded");
+                    $refund = User::where('id', Auth::id())->increment('wallet', $order->cost);
+                    if($refund){
+                        Verification::where('order_id', $request->id)->delete();
+                    }
+                    return redirect('home')->with('message', "Order has been canceled, NGN$amount has been refunded");
 
 
                 }

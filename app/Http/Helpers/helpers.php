@@ -345,13 +345,9 @@ function create_order($service, $price, $cost, $service_name){
 
 function create_tellbot_order($service, $price, $cost){
 
-    // $verification = Verification::latest()->where('user_id', Auth::id())->where('status', 1)->first() ?? null;
 
-    // if($verification != null || $verification == 1){
-    //     return 9;
-    // }
 
-    // dd($verification);
+
 
     $states = [
         'CA', 'TX', 'FL', 'NY', 'PA', 'IL', 'OH', 'GA', 'NC', 'MI',
@@ -383,14 +379,16 @@ function create_tellbot_order($service, $price, $cost){
     $result = $var ??  null;
     $result = json_decode($result, true);
     $result_d = $result['message'][0];
-
-    // dd($result['mdn']);
-
+    $mdn = $result['message'][0]['mdn'] ?? null;
 
 
-     if($result['status'] == "ok") {
 
-         User::where('id', Auth::id())->decrement('wallet', $price);
+
+
+
+     if($result['status'] == "ok" && $mdn != null ) {
+
+         User::where('id', Auth::id())->decrement('wallet', (int)$price);
 
          //  $parts = explode(":", $result);
          $accessNumber = $result_d['mdn'];
@@ -415,7 +413,7 @@ function create_tellbot_order($service, $price, $cost){
      }elseif($result['status'] == "error") {
          return 0;
      }else{
-         return 0;
+         return 9;
      }
 
 
