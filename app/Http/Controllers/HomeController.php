@@ -980,9 +980,15 @@ class HomeController extends Controller
             ]);
         }
 
-            User::where('email', $request->email)->increment('wallet', $request->amount) ?? null;
 
-        $amount = number_format($request->amount, 2);
+
+        $percent = Setting::where('id', 1)->value('discount');
+        $bonus = ($request->amount * $percent) / 100;
+        $amount_funded = $request->amount + $bonus;
+
+        User::where('email', $request->email)->increment('wallet', $amount_funded);
+
+        $amount = number_format($amount_funded, 2);
 
         $get_depo = Transaction::where('ref_id', $request->order_id)->first() ?? null;
         if ($get_depo == null){
@@ -990,7 +996,7 @@ class HomeController extends Controller
             $trx->ref_id = $request->order_id;
             $trx->user_id = $get_user->id;
             $trx->status = 1;
-            $trx->amount = $request->amount;
+            $trx->amount = $amount_funded;
             $trx->type = 2;
             $trx->save();
         }else{
@@ -1005,7 +1011,7 @@ class HomeController extends Controller
 
         return response()->json([
             'status' => true,
-            'message' => "NGN $amount has been successfully added to your wallet",
+            'message' => "NGN $amount_funded has been successfully added to your wallet",
         ]);
 
     }
