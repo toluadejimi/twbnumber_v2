@@ -28,8 +28,8 @@ Route::any('online-hook', [HomeController::class, 'simhook']);
 
 
 
-Route::any('e_fund',  [HomeController::class,'e_fund']);
-Route::any('e_check',  [HomeController::class,'e_check']);
+Route::any('e-fund',  [HomeController::class,'e_fund']);
+Route::any('verify',  [HomeController::class,'e_check']);
 
 Route::post('fund',  [ProductController::class,'e_fund']);
 

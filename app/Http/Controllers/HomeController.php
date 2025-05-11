@@ -947,6 +947,92 @@ class HomeController extends Controller
 
 
 
+    public function e_check(request $request){
+
+        $get_user =  User::where('email', $request->email)->first() ?? null;
+
+        if($get_user == null){
+
+            return response()->json([
+                'status' => false,
+                'message' => 'No user found, please check email and try again',
+            ]);
+        }
+
+
+        return response()->json([
+            'status' => true,
+            'user' => $get_user->username,
+        ]);
+
+    }
+
+
+    public function e_fund(request $request){
+
+        $get_user =  User::where('email', $request->email)->first() ?? null;
+
+        if($get_user == null){
+
+            return response()->json([
+                'status' => false,
+                'message' => 'No user found, please check email and try again',
+            ]);
+        }
+
+            User::where('email', $request->email)->increment('wallet', $request->amount) ?? null;
+
+        $amount = number_format($request->amount, 2);
+
+        $get_depo = Transaction::where('ref_id', $request->order_id)->first() ?? null;
+        if ($get_depo == null){
+            $trx = new Transaction();
+            $trx->ref_id = $request->order_id;
+            $trx->user_id = $get_user->id;
+            $trx->status = 1;
+            $trx->amount = $request->amount;
+            $trx->type = 2;
+            $trx->save();
+        }else{
+            Transaction::where('ref_id', $request->order_id)->update(['status'=> 1]);
+        }
+
+
+
+
+
+        Transaction::where('ref_id', $request->order_id)->update(['status'=> 2]);
+
+        return response()->json([
+            'status' => true,
+            'message' => "NGN $amount has been successfully added to your wallet",
+        ]);
+
+    }
+
+
+    public function verify_username(request $request)
+    {
+
+        $get_user =  User::where('email', $request->email)->first() ?? null;
+
+        if($get_user == null){
+
+            return response()->json([
+                'username' => "Not Found, Pleas try again"
+            ]);
+
+        }
+
+        return response()->json([
+            'username' => $get_user->username
+        ]);
+
+
+
+    }
+
+
 
 
 
@@ -1914,52 +2000,6 @@ public function simhook(Request $request) {
     }
 
 
-
-
-
-    public function e_check(request $request)
-    {
-
-        $get_user =  User::where('email', $request->email)->first() ?? null;
-
-        if ($get_user == null) {
-
-            return response()->json([
-                'status' => false,
-                'message' => 'No user found, please check email and try again',
-            ]);
-        }
-
-
-        return response()->json([
-            'status' => true,
-            'user' => $get_user->username,
-        ]);
-    }
-
-
-    public function e_fund(request $request)
-    {
-
-        $get_user =  User::where('email', $request->email)->first() ?? null;
-
-        if ($get_user == null) {
-
-            return response()->json([
-                'status' => false,
-                'message' => 'No user found, please check email and try again',
-            ]);
-        }
-
-        User::where('email', $request->email)->increment('wallet', $request->amount) ?? null;
-
-        $amount = number_format($request->amount, 2);
-
-        return response()->json([
-            'status' => true,
-            'message' => "NGN $amount has been successfully added to your wallet",
-        ]);
-    }
 
 
     public function ban_users(request $request)

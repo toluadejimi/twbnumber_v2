@@ -363,8 +363,9 @@ function create_tellbot_order($service, $price, $cost){
 
     $markup = 20;
 
+    $url = "https://www.tellabot.com/sims/api_command.php?cmd=request&user={$user}&api_key={$APIKEY}&service={$service}&&markup={$markup}";
     curl_setopt_array($curl, array(
-        CURLOPT_URL => "https://www.tellabot.com/sims/api_command.php?cmd=request&user={$user}&api_key={$APIKEY}&service={$service}&&markup={$markup}",
+        CURLOPT_URL => $url,
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
